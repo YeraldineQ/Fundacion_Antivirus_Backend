@@ -23,8 +23,7 @@ public class UbicacionService {
 
     public Ubicacion update(Long id, Ubicacion ubicacion) {
         Ubicacion existing = repository.findById(id).orElseThrow();
-        existing.setDireccion(ubicacion.getDireccion());
-        existing.setInstitucion(ubicacion.getInstitucion());
+        existing.setRegion(ubicacion.getRegion());
         return repository.save(existing);
     }
 

@@ -2,19 +2,22 @@ package com.fundacionantivirus.backend.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Ubicacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String direccion;
+    private String region;
 
-    @ManyToOne
-    @JoinColumn(name = "institucion_id")
-    private Institucion institucion;
+    @OneToMany(mappedBy = "idRegion", cascade = CascadeType.REMOVE)
+    private List<Institucion> institucion;
 
     // Getters y setters
+
+
     public Long getId() {
         return id;
     }
@@ -23,20 +26,12 @@ public class Ubicacion {
         this.id = id;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getRegion() {
+        return region;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public Institucion getInstitucion() {
-        return institucion;
-    }
-
-    public void setInstitucion(Institucion institucion) {
-        this.institucion = institucion;
+    public void setRegion(String region) {
+        this.region = region;
     }
 }
 

@@ -10,9 +10,13 @@ public class Institucion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+    private String direccion;
 
-    @OneToMany(mappedBy = "institucion")
-    private List<Ubicacion> ubicaciones;
+    @ManyToOne
+    @JoinColumn(name = "id_region")
+    private Ubicacion idRegion;
+
+
 
     // Getters y setters
     public Long getId() {
@@ -31,11 +35,19 @@ public class Institucion {
         this.nombre = nombre;
     }
 
-    public List<Ubicacion> getUbicaciones() {
-        return ubicaciones;
+    public Ubicacion getIdRegion() {
+        return idRegion;
     }
 
-    public void setUbicaciones(List<Ubicacion> ubicaciones) {
-        this.ubicaciones = ubicaciones;
+    public void setIdRegion(Ubicacion idRegion) {
+        this.idRegion = idRegion;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 }

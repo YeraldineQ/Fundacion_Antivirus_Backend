@@ -28,8 +28,7 @@ public class UbicacionController {
     @PutMapping("/{id}")
     public Ubicacion update(@PathVariable Long id, @RequestBody Ubicacion ubicacion) {
         Ubicacion existing = repository.findById(id).orElseThrow();
-        existing.setDireccion(ubicacion.getDireccion());
-        existing.setInstitucion(ubicacion.getInstitucion());
+        existing.setRegion(ubicacion.getRegion());
         return repository.save(existing);
     }
 
