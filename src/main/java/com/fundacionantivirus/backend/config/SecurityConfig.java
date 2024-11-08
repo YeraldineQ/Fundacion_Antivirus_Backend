@@ -35,6 +35,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/estado-oportunidades/**").hasAnyRole("Admin")
                         .requestMatchers("/api/role/**").hasAnyRole("Admin")
+                        .requestMatchers("/api/informacion-oportunidades/**").hasAnyRole("Admin")
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable())
