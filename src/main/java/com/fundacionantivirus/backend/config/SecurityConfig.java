@@ -28,14 +28,15 @@ public class SecurityConfig {
 
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenProvider);
         http.authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() //permite tener acceso swagger y docmentación
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() //permite tener acceso swagger y documentación
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/visitante/**").permitAll()
                         .requestMatchers("/api/usuario/**").hasAnyRole("User", "Admin")
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/**").hasRole("Admin")
                         .requestMatchers("/api/estado-oportunidades/**").hasAnyRole("Admin")
                         .requestMatchers("/api/role/**").hasAnyRole("Admin")
                         .requestMatchers("/api/informacion-oportunidades/**").hasAnyRole("Admin")
+                        .requestMatchers("/api/categoria-oportunidades/**").hasRole("Admin")
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable())

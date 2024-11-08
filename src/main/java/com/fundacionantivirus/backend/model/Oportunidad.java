@@ -22,6 +22,10 @@ public class Oportunidad {
     @JoinColumn(name = "informacion_oportunidad_id")
     private InformacionOportunidad informacionOportunidad;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_oportunidad_id")
+    private CategoriaOportinidad categoriaOportinidad;
+
     // Getters y setters
     public Long getId() {
         return id;
@@ -54,5 +58,9 @@ public class Oportunidad {
     public InformacionOportunidad getInformacionOportunidad() { return informacionOportunidad;}
 
     public void setInformacionOportunidad(InformacionOportunidad informacionOportunidad) { this.informacionOportunidad = informacionOportunidad;}
+
+    public CategoriaOportinidad getCategoriaOportinidad() { return categoriaOportinidad;}
+
+    public void setCategoriaOportinidad(CategoriaOportinidad categoriaOportinidad) { this.categoriaOportinidad = categoriaOportinidad;}
 }
 
