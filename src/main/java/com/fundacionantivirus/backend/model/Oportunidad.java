@@ -14,6 +14,10 @@ public class Oportunidad {
     @JoinColumn(name = "tipo_oportunidad_id")
     private TipoOportunidad tipoOportunidad;
 
+    @ManyToOne
+    @JoinColumn(name = "estado_oportunidad_id")
+    private EstadoOportunidad estadoOportunidad;
+
     // Getters y setters
     public Long getId() {
         return id;
@@ -37,6 +41,14 @@ public class Oportunidad {
 
     public void setTipoOportunidad(TipoOportunidad tipoOportunidad) {
         this.tipoOportunidad = tipoOportunidad;
+    }
+
+    public EstadoOportunidad getEstadoOportunidad() {
+        return estadoOportunidad;
+    }
+
+    public void setEstadoOportunidad(EstadoOportunidad estadoOportunidad) {
+        this.estadoOportunidad = estadoOportunidad;
     }
 }
 

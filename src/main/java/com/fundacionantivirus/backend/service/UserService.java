@@ -74,7 +74,7 @@ public class UserService implements UserDetailsService {
         user.setPassword(passwordEncoder().encode(user.getPassword())); // Encode password
 // Define roles for the user
         Set<Role> roles = new HashSet<>();
-        roles.add(roleRepository.findByName("USER")); // Asegúrate de que este rol exista en la base de datos
+        roles.add(roleRepository.findByName("User")); // Asegúrate de que este rol exista en la base de datos
         user.setRoles(roles);
 // Guarda el usuario en la base de datos
         userRepository.save(user);

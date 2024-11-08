@@ -1,7 +1,9 @@
 package com.fundacionantivirus.backend.service;
 
+import com.fundacionantivirus.backend.model.EstadoOportunidad;
 import com.fundacionantivirus.backend.model.Oportunidad;
 import com.fundacionantivirus.backend.model.TipoOportunidad;
+import com.fundacionantivirus.backend.repository.EstadoOportunidadRepository;
 import com.fundacionantivirus.backend.repository.OportunidadRepository;
 import com.fundacionantivirus.backend.repository.TipoOportunidadRepository;
 
@@ -20,15 +22,22 @@ public class OportunidadService {
     @Autowired
     private TipoOportunidadRepository tipoOportunidadRepository;
 
+    @Autowired
+    private EstadoOportunidadRepository estadoOportunidadRepository;
+
     public List<Oportunidad> getAll() {
         return repository.findAll();
     }
 
-    public ResponseEntity<Oportunidad> create(Oportunidad oportunidad, Long idTipo) {
+    public ResponseEntity<Oportunidad> create(Oportunidad oportunidad, Long idTipo, Long idEstado) {
 
         TipoOportunidad tipoOportunidad = tipoOportunidadRepository.findById(idTipo)
         .orElseThrow(() -> new RuntimeException("tipo no encontrada"));
+
+        EstadoOportunidad estadoOportunidad = estadoOportunidadRepository.findById(idEstado)
+                .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
         oportunidad.setTipoOportunidad(tipoOportunidad);
+        oportunidad.setEstadoOportunidad(estadoOportunidad);
         Oportunidad newOportunidad = repository.save(oportunidad);
         return ResponseEntity.ok(newOportunidad);
     }

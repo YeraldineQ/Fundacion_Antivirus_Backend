@@ -31,8 +31,10 @@ public class SecurityConfig {
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() //permite tener acceso swagger y docmentación
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/visitante/**").permitAll()
-                        .requestMatchers("/api/usuario/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/api/usuario/**").hasAnyRole("User", "Admin")
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/estado-oportunidades/**").hasAnyRole("Admin")
+                        .requestMatchers("/api/role/**").hasAnyRole("Admin")
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable())
