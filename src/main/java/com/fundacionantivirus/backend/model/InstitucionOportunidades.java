@@ -10,11 +10,11 @@ public class InstitucionOportunidades {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "instituciones", referencedColumnName = "id")
+    @JoinColumn(name = "instituciones_id", referencedColumnName = "id")
     private Institucion institucion;
 
     @ManyToOne
-    @JoinColumn(name = "Oportunidades", referencedColumnName = "id")
+    @JoinColumn(name = "Oportunidades_id", referencedColumnName = "id")
     private Oportunidad oportunidad;
 
 
