@@ -2,6 +2,9 @@ package com.fundacionantivirus.backend.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 public class Oportunidad {
 
@@ -24,7 +27,17 @@ public class Oportunidad {
 
     @ManyToOne
     @JoinColumn(name = "categoria_oportunidad_id")
-    private CategoriaOportinidad categoriaOportinidad;
+    private Categoria categoriaOportinidad;
+
+    @ManyToMany(fetch = FetchType.EAGER)@JoinTable(name = "institucion_oportunidad",
+            joinColumns = @JoinColumn(name = "institucion_id"),
+            inverseJoinColumns = @JoinColumn(name = "oportunidad_id"))
+    private Set<Institucion> institucionOportunidad = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)@JoinTable(name = "user_oportunidad",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "oportunidad_id"))
+    private Set<User> userOportunidad = new HashSet<>();
 
     // Getters y setters
     public Long getId() {
@@ -59,8 +72,24 @@ public class Oportunidad {
 
     public void setInformacionOportunidad(InformacionOportunidad informacionOportunidad) { this.informacionOportunidad = informacionOportunidad;}
 
-    public CategoriaOportinidad getCategoriaOportinidad() { return categoriaOportinidad;}
+    public Categoria getCategoriaOportinidad() { return categoriaOportinidad;}
 
-    public void setCategoriaOportinidad(CategoriaOportinidad categoriaOportinidad) { this.categoriaOportinidad = categoriaOportinidad;}
+    public void setCategoriaOportinidad(Categoria categoriaOportinidad) { this.categoriaOportinidad = categoriaOportinidad;}
+
+    public Set<Institucion> getInstitucionOportunidad() {
+        return institucionOportunidad;
+    }
+
+    public void setInstitucionOportunidad(Set<Institucion> institucionOportunidad) {
+        this.institucionOportunidad = institucionOportunidad;
+    }
+
+    public Set<User> getUserOportunidad() {
+        return userOportunidad;
+    }
+
+    public void setUserOportunidad(Set<User> userOportunidad) {
+        this.userOportunidad = userOportunidad;
+    }
 }
 

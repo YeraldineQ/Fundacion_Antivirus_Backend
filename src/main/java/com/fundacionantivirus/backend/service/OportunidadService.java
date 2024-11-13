@@ -25,30 +25,15 @@ public class OportunidadService {
     private InformacionOportunidadRepository informacionOportunidadRepository;
 
     @Autowired
-    private CategoriaOportunidadRepository categoriaOportunidadRepository;
+    private CategoriaRepository categoriaOportunidadRepository;
 
     public List<Oportunidad> getAll() {
         return repository.findAll();
     }
 
-    public ResponseEntity<Oportunidad> create(Oportunidad oportunidad, Long idTipo, Long idEstado, Long idInformacion, Long idCategoria) {
+    public ResponseEntity<Oportunidad> create(Oportunidad oportunidad) {
 
-        TipoOportunidad tipoOportunidad = tipoOportunidadRepository.findById(idTipo)
-        .orElseThrow(() -> new RuntimeException("tipo no encontrada"));
 
-        EstadoOportunidad estadoOportunidad = estadoOportunidadRepository.findById(idEstado)
-                .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
-
-        InformacionOportunidad informacionOportunidad = informacionOportunidadRepository.findById(idInformacion)
-                .orElseThrow(() -> new RuntimeException("Información no encontrada"));
-
-        CategoriaOportinidad categoriaOportinidad = categoriaOportunidadRepository.findById(idCategoria)
-                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
-
-        oportunidad.setTipoOportunidad(tipoOportunidad);
-        oportunidad.setEstadoOportunidad(estadoOportunidad);
-        oportunidad.setInformacionOportunidad(informacionOportunidad);
-        oportunidad.setCategoriaOportinidad(categoriaOportinidad);
         Oportunidad newOportunidad = repository.save(oportunidad);
         return ResponseEntity.ok(newOportunidad);
     }

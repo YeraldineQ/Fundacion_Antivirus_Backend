@@ -22,9 +22,9 @@ public class OportunidadController {
         return oportunidadService.getAll();
     }
 
-    @PostMapping("/{idTipo}")
-    public ResponseEntity<Oportunidad> create(@RequestBody Oportunidad oportunidad,@PathVariable Long idTipo, @PathVariable Long idEstado, @PathVariable Long idInformacion, @PathVariable Long idCategoria) {
-        return oportunidadService.create(oportunidad, idTipo, idEstado, idInformacion, idCategoria);
+    @PostMapping
+    public ResponseEntity<Oportunidad> create(@RequestBody Oportunidad oportunidad) {
+        return oportunidadService.create(oportunidad);
     }
 
     @PutMapping("/{id}")

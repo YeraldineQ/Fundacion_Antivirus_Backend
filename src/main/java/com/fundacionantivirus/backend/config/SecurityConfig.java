@@ -30,13 +30,14 @@ public class SecurityConfig {
         http.authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() //permite tener acceso swagger y documentación
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/visitante/**").permitAll()
-                        .requestMatchers("/api/usuario/**").hasAnyRole("User", "Admin")
-                        .requestMatchers("/api/admin/**").hasRole("Admin")
                         .requestMatchers("/api/estado-oportunidades/**").hasAnyRole("Admin")
                         .requestMatchers("/api/role/**").hasAnyRole("Admin")
                         .requestMatchers("/api/informacion-oportunidades/**").hasAnyRole("Admin")
-                        .requestMatchers("/api/categoria-oportunidades/**").hasAnyRole("Admin")
+                        .requestMatchers("/api/categoria/**").hasAnyRole("Admin")
+                        .requestMatchers("/api/institucion-oportunidades/**").hasAnyRole("Admin")
+                        .requestMatchers("/api/tipos-oportunidades/**").hasAnyRole("Admin")
+                        .requestMatchers("/api/oportunidades/**").hasAnyRole("Admin")
+
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable())

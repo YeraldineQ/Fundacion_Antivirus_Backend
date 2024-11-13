@@ -1,26 +1,26 @@
 package com.fundacionantivirus.backend.service;
 
-import com.fundacionantivirus.backend.model.CategoriaOportinidad;
-import com.fundacionantivirus.backend.repository.CategoriaOportunidadRepository;
+import com.fundacionantivirus.backend.model.Categoria;
+import com.fundacionantivirus.backend.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CategoriaOportunidadService {
+public class CategoriaService {
     @Autowired
-    private CategoriaOportunidadRepository repository;
+    private CategoriaRepository repository;
 
-    public List<CategoriaOportinidad> getAll() {
+    public List<Categoria> getAll() {
         return repository.findAll();
     }
 
-    public CategoriaOportinidad create(CategoriaOportinidad categoriaOportinidad) {
+    public Categoria create(Categoria categoriaOportinidad) {
         return repository.save(categoriaOportinidad);
     }
 
-    public CategoriaOportinidad getById(Long id) {
+    public Categoria getById(Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
     }
 }
