@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -36,16 +38,17 @@ public class AuthController {
     private UserService userService; // Your UserDetailsService implementation
 
     @PostMapping("/authenticate") // New endpoint for authentication
-    public ResponseEntity<String> authenticate(@RequestBody User user) {
+    public ResponseEntity<Object> authenticate(@RequestBody User user) {
         logger.info(() -> "ingresando a authenticate");
         try {
 // Attempt to authenticate the user
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+            User users = userService.getByEmail(user.getEmail());
 
             // If authentication is successful, generate a JWT token
             String token = jwtTokenProvider.generateToken(authentication);
-            return ResponseEntity.ok(token);
+            return ResponseEntity.ok().body(Map.of("token",token,"role",users.getRoles()));
         } catch (UsernameNotFoundException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
         } catch (BadCredentialsException e) {

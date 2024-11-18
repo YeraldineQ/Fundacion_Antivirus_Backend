@@ -32,12 +32,15 @@ public class UserService implements UserDetailsService {
             LoggerFactory.getLogger(UserService.class);
     @Autowired
     private UserRepository userRepository;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Autowired
     private RoleRepository roleRepository;
+
     @Override
     public UserDetails loadUserByUsername(String email) throws
 
@@ -53,18 +56,20 @@ public class UserService implements UserDetailsService {
                 getAuthorities(user) // Ensure this method correctly returns authorities
         );
     }
+
     private Collection<? extends GrantedAuthority> getAuthorities(User user) {
         logger.info(user::toString);
 // Implement authority retrieval logic (roles)
         return user.getRoles().stream()
 
-                .map(role -> new SimpleGrantedAuthority("ROLE_"+
+                .map(role -> new SimpleGrantedAuthority("ROLE_" +
 
                         role.getName()))
 
                 .collect(Collectors.toList());
 
     }
+
     // Optional: Method to register a new user
     public void registerUser(User user) {
 // Verifica si el usuario ya existe por correo electrónico
@@ -78,5 +83,9 @@ public class UserService implements UserDetailsService {
         user.setRoles(roles);
 // Guarda el usuario en la base de datos
         userRepository.save(user);
+    }
+
+    public User getByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }
