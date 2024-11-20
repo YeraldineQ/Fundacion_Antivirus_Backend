@@ -33,10 +33,12 @@ public class SecurityConfig {
                         .requestMatchers("/api/estado-oportunidades/**").hasAnyRole("Admin")
                         .requestMatchers("/api/role/**").hasAnyRole("Admin")
                         .requestMatchers("/api/informacion-oportunidades/**").hasAnyRole("Admin")
-                        .requestMatchers("/api/categoria/**").hasAnyRole("Admin")
+                        .requestMatchers("/api/categoria/**").permitAll()
                         .requestMatchers("/api/institucion-oportunidades/**").hasAnyRole("Admin")
                         .requestMatchers("/api/tipos-oportunidades/**").hasAnyRole("Admin")
                         .requestMatchers("/api/oportunidades/**").hasAnyRole("Admin")
+                        .requestMatchers("/api/ubicaciones/**").permitAll()
+                        .requestMatchers("/api/instituciones/**").permitAll()
 
                         .anyRequest().authenticated()
                 )
@@ -63,7 +65,7 @@ public class SecurityConfig {
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE",
                 "OPTIONS")); // Métodos permitidos
         config.setAllowedHeaders(Arrays.asList("Authorization",
-                "Content-Type"));
+                "Content-Type", "*"));
         config.setAllowCredentials(true); // Permitir credenciales (opcional)
         UrlBasedCorsConfigurationSource source = new
                 UrlBasedCorsConfigurationSource();
