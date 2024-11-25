@@ -88,8 +88,11 @@ public class Oportunidad {
         return userOportunidad;
     }
 
-    public void setUserOportunidad(Set<User> userOportunidad) {
-        this.userOportunidad = userOportunidad;
+    public Oportunidad() {
+    }
+
+    public Oportunidad(Set<Institucion> institucionOportunidad) {
+        this.institucionOportunidad = institucionOportunidad;
     }
 }
 

@@ -29,6 +29,7 @@ public class TipoOportunidadController {
     public TipoOportunidad update(@PathVariable Long id, @RequestBody TipoOportunidad tipoOportunidad) {
         TipoOportunidad existing = repository.findById(id).orElseThrow();
         existing.setNombre(tipoOportunidad.getNombre());
+        existing.setUrl(tipoOportunidad.getUrl());
         return repository.save(existing);
     }
 

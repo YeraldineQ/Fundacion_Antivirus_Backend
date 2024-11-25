@@ -1,9 +1,11 @@
 package com.fundacionantivirus.backend.controller;
 
 
+import com.fundacionantivirus.backend.dto.FiltrarOportunidadesDTO;
 import com.fundacionantivirus.backend.model.Oportunidad;
 import com.fundacionantivirus.backend.service.OportunidadService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,5 +38,7 @@ public class OportunidadController {
     public void delete(@PathVariable Long id) {
         oportunidadService.delete(id);
     }
+
+
 }
 

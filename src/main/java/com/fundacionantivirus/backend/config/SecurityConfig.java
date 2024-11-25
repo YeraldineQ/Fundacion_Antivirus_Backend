@@ -29,16 +29,16 @@ public class SecurityConfig {
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenProvider);
         http.authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() //permite tener acceso swagger y documentación
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/estado-oportunidades/**").hasAnyRole("Admin")
-                        .requestMatchers("/api/role/**").hasAnyRole("Admin")
-                        .requestMatchers("/api/informacion-oportunidades/**").hasAnyRole("Admin")
-                        .requestMatchers("/api/categoria/**").permitAll()
-                        .requestMatchers("/api/institucion-oportunidades/**").hasAnyRole("Admin")
-                        .requestMatchers("/api/tipos-oportunidades/**").hasAnyRole("Admin")
-                        .requestMatchers("/api/oportunidades/**").hasAnyRole("Admin")
-                        .requestMatchers("/api/ubicaciones/**").permitAll()
-                        .requestMatchers("/api/instituciones/**").permitAll()
+                        .requestMatchers("/api/**").permitAll()
+//                        .requestMatchers("/api/estado-oportunidades/**").permitAll()
+//                        .requestMatchers("/api/role/**").hasAnyRole("Admin")
+//                        .requestMatchers("/api/informacion-oportunidades/**").permitAll()
+//                        .requestMatchers("/api/categoria/**").permitAll()
+//                        .requestMatchers("/api/institucion-oportunidades/**").permitAll()
+//                        .requestMatchers("/api/tipos-oportunidades/**").permitAll()
+//                        .requestMatchers("/api/oportunidades/**").permitAll()
+//                        .requestMatchers("/api/ubicaciones/**").permitAll()
+//                        .requestMatchers("/api/instituciones/**").permitAll()
 
                         .anyRequest().authenticated()
                 )

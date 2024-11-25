@@ -1,5 +1,6 @@
 package com.fundacionantivirus.backend.service;
 
+import com.fundacionantivirus.backend.dto.FiltrarOportunidadesDTO;
 import com.fundacionantivirus.backend.model.*;
 import com.fundacionantivirus.backend.repository.*;
 
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 @Service
 public class OportunidadService {
@@ -26,6 +28,9 @@ public class OportunidadService {
 
     @Autowired
     private CategoriaRepository categoriaOportunidadRepository;
+
+    @Autowired
+    private CustomInstitucionesOportunidadesRepositoryImpl customInstitucionesOportunidadesRepository;
 
     public List<Oportunidad> getAll() {
         return repository.findAll();
@@ -52,3 +57,4 @@ public class OportunidadService {
         repository.deleteById(id);
     }
 }
+
