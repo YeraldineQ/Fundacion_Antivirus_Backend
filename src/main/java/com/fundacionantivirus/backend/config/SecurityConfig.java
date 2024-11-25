@@ -28,11 +28,18 @@ public class SecurityConfig {
 
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenProvider);
         http.authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() //permite tener acceso swagger y docmentación
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/visitante/**").permitAll()
-                        .requestMatchers("/api/usuario/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() //permite tener acceso swagger y documentación
+                        .requestMatchers("/api/**").permitAll()
+//                        .requestMatchers("/api/estado-oportunidades/**").permitAll()
+//                        .requestMatchers("/api/role/**").hasAnyRole("Admin")
+//                        .requestMatchers("/api/informacion-oportunidades/**").permitAll()
+//                        .requestMatchers("/api/categoria/**").permitAll()
+//                        .requestMatchers("/api/institucion-oportunidades/**").permitAll()
+//                        .requestMatchers("/api/tipos-oportunidades/**").permitAll()
+//                        .requestMatchers("/api/oportunidades/**").permitAll()
+//                        .requestMatchers("/api/ubicaciones/**").permitAll()
+//                        .requestMatchers("/api/instituciones/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable())
@@ -58,7 +65,7 @@ public class SecurityConfig {
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE",
                 "OPTIONS")); // Métodos permitidos
         config.setAllowedHeaders(Arrays.asList("Authorization",
-                "Content-Type"));
+                "Content-Type", "*"));
         config.setAllowCredentials(true); // Permitir credenciales (opcional)
         UrlBasedCorsConfigurationSource source = new
                 UrlBasedCorsConfigurationSource();

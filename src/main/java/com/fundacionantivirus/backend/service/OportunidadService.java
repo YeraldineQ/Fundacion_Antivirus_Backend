@@ -1,15 +1,15 @@
 package com.fundacionantivirus.backend.service;
 
-import com.fundacionantivirus.backend.model.Oportunidad;
-import com.fundacionantivirus.backend.model.TipoOportunidad;
-import com.fundacionantivirus.backend.repository.OportunidadRepository;
-import com.fundacionantivirus.backend.repository.TipoOportunidadRepository;
+import com.fundacionantivirus.backend.dto.FiltrarOportunidadesDTO;
+import com.fundacionantivirus.backend.model.*;
+import com.fundacionantivirus.backend.repository.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 @Service
 public class OportunidadService {
@@ -20,15 +20,25 @@ public class OportunidadService {
     @Autowired
     private TipoOportunidadRepository tipoOportunidadRepository;
 
+    @Autowired
+    private EstadoOportunidadRepository estadoOportunidadRepository;
+
+    @Autowired
+    private InformacionOportunidadRepository informacionOportunidadRepository;
+
+    @Autowired
+    private CategoriaRepository categoriaOportunidadRepository;
+
+    @Autowired
+    private CustomInstitucionesOportunidadesRepositoryImpl customInstitucionesOportunidadesRepository;
+
     public List<Oportunidad> getAll() {
         return repository.findAll();
     }
 
-    public ResponseEntity<Oportunidad> create(Oportunidad oportunidad, Long idTipo) {
+    public ResponseEntity<Oportunidad> create(Oportunidad oportunidad) {
 
-        TipoOportunidad tipoOportunidad = tipoOportunidadRepository.findById(idTipo)
-        .orElseThrow(() -> new RuntimeException("tipo no encontrada"));
-        oportunidad.setTipoOportunidad(tipoOportunidad);
+
         Oportunidad newOportunidad = repository.save(oportunidad);
         return ResponseEntity.ok(newOportunidad);
     }
@@ -37,6 +47,9 @@ public class OportunidadService {
         Oportunidad existing = repository.findById(id).orElseThrow();
         existing.setDescripcion(oportunidad.getDescripcion());
         existing.setTipoOportunidad(oportunidad.getTipoOportunidad());
+        existing.setEstadoOportunidad(oportunidad.getEstadoOportunidad());
+        existing.setInformacionOportunidad(oportunidad.getInformacionOportunidad());
+        existing.setCategoriaOportinidad(oportunidad.getCategoriaOportinidad());
         return repository.save(existing);
     }
 
@@ -44,3 +57,4 @@ public class OportunidadService {
         repository.deleteById(id);
     }
 }
+

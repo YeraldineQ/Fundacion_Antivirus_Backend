@@ -1,7 +1,10 @@
 package com.fundacionantivirus.backend.model;
 
 import jakarta.persistence.*;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Institucion {
@@ -15,7 +18,6 @@ public class Institucion {
     @ManyToOne
     @JoinColumn(name = "id_region")
     private Ubicacion idRegion;
-
 
 
     // Getters y setters

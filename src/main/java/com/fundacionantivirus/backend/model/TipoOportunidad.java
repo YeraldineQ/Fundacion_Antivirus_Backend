@@ -9,6 +9,7 @@ public class TipoOportunidad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+    private String url;
 
     // Getters y setters
     public Long getId() {
@@ -25,6 +26,17 @@ public class TipoOportunidad {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public TipoOportunidad() {
     }
 }
 
