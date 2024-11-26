@@ -51,22 +51,27 @@ public class FiltroService {
 
     //Filtrar oportunidades.
     public List<FiltrarOportunidadesDTO> filtrador(FiltrarOportunidadesDTO filtrarOportunidadesDTO) {
-
-        List<Oportunidad> OportunidadList = customInstitucionesOportunidadesRepository.filtrarOportunidades(filtrarOportunidadesDTO);
-
-        List<FiltrarOportunidadesDTO> filtrarOportunidadesDTOList = mapperToDTO(OportunidadList);
-
-        return filtrarOportunidadesDTOList;
+        List<Oportunidad> oportunidadList = customInstitucionesOportunidadesRepository.filtrarOportunidades(filtrarOportunidadesDTO);
+        if (oportunidadList == null || oportunidadList.isEmpty()) {
+            return List.of(); // Return empty list instead of null
+        }
+        return mapperToDTO(oportunidadList);
     }
 
     //Obtener todas las relaciones institución-oportunidad.
     public List<FiltrarOportunidadesDTO> filtrador() {
-
         List<Oportunidad> institucionesOportunidadesList = repository.findAll();
+        if (institucionesOportunidadesList == null || institucionesOportunidadesList.isEmpty()) {
+            return List.of(); // Return empty list instead of null
+        }
 
-        List<FiltrarOportunidadesDTO> filtrarOportunidadesDTOList = mapperToDTO(institucionesOportunidadesList);
+        // Filter out opportunities without institutions
+        institucionesOportunidadesList = institucionesOportunidadesList.stream()
+            .filter(oportunidad -> oportunidad.getInstitucionOportunidad() != null && 
+                    !oportunidad.getInstitucionOportunidad().isEmpty())
+            .collect(Collectors.toList());
 
-        return filtrarOportunidadesDTOList;
+        return mapperToDTO(institucionesOportunidadesList);
     }
 
 
